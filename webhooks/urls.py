@@ -20,6 +20,5 @@ from webhooks import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index),
-    path('ping', views.ping)
+    path('', views.ping)
 ]

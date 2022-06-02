@@ -8,12 +8,6 @@ from rest_framework import permissions
 logging.basicConfig(level=logging.DEBUG)
 
 
-@decorators.api_view(['GET'])
-@decorators.permission_classes([permissions.AllowAny])
-def index(req: request.Request) -> response.Response:
-    return response.Response("index")
-
-
 @decorators.api_view(['POST'])
 @decorators.permission_classes([permissions.AllowAny])
 def ping(req: request.Request) -> response.Response:
