@@ -1,0 +1,12 @@
+version: "2.2"
+
+services:
+  webhooks:
+    container_name: webhooks_container
+    build: .
+    ports:
+      - "9999:9999"
+    command: bash -c "python -u manage.py runserver 0.0.0.0:9999"
+    volumes:
+      - .:/usr/src/
+    restart: unless-stopped
