@@ -9,11 +9,14 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-
+import json
+from environ import Env
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+env = Env()
 
 
 # Quick-start development settings - unsuitable for production
@@ -22,10 +25,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-)uc+4mq#%ko=5)b)a@s3sx3+8$d7h0ax3#7clf6$c)@*e$zjjf'
 
+GITHUB_USER = env.str('GITHUB_USER')
+GITHUB_HOST = env.str('GITHUB_HOST')
+GITHUB_TOKEN = env.str('GITHUB_TOKEN')
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['108.61.171.26']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost'] + [env.str('ALLOWED_HOST')]
 
 # Application definition
 
@@ -123,3 +130,8 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+PROJECTS = []
+
+with open('projects.json', 'rb') as projects_json:
+    PROJECTS = json.load(projects_json)

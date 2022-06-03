@@ -20,5 +20,5 @@ from webhooks import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.ping)
+    path('<str:project_name>', views.handle)
 ]
