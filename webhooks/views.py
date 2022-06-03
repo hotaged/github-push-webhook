@@ -31,7 +31,12 @@ def handle(req: request.Request, project_name: str) -> response.Response:
                 url = f'https://{settings.GITHUB_USER}:{settings.GITHUB_TOKEN}@{settings.GITHUB_HOST}/{project["owner"]}/{project["name"]}.git'
 
                 out = subprocess.run(['git', 'pull', url], capture_output=True)
+                logging.debug(out.__str__())
 
+                out = subprocess.run(['docker-compose', 'down'], capture_output=True)
+                logging.debug(out.__str__())
+
+                out = subprocess.run(['docker-compose', 'up', '-d', '--build'], capture_output=True)
                 logging.debug(out.__str__())
 
                 os.chdir(cwd)
